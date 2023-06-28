@@ -1,4 +1,4 @@
-call venv\Scripts\activate.bat
+source venv/bin/activate
 python initial.py
 python test.py
 python mask.py
