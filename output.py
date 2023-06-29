@@ -29,25 +29,29 @@ if(data["color"]=="none"):
 
 #黑
 if(data["color"]=="black"):
-    for filename in os.listdir(im1_path):
-        if filename.endswith(".png"):
-            # 读取原图
-            person = cv2.imread(os.path.join(im1_path, filename))
-            person_ori = person.copy()
-    for filename in os.listdir(im1_path):
-        if filename.endswith(".png"):
-            # 读取mask图
-            mask = cv2.imread(os.path.join(im2_path, filename), cv2.IMREAD_GRAYSCALE)
+    # 获取原图和mask图的文件名列表
+    im1_files = [f for f in os.listdir(im1_path) if f.endswith(".png")]
+    im2_files = [f for f in os.listdir(im2_path) if f.endswith(".png")]
+    # 按照文件名的顺序进行排序，确保对应关系
+    im1_files.sort()
+    im2_files.sort()
+    # 遍历文件名列表，一一处理每张图片
+    for i in range(len(im1_files)):
+        # 读取原图
+        person = cv2.imread(os.path.join(im1_path, im1_files[i]))
+        person_ori = person.copy()
+        # 读取mask图
+        mask = cv2.imread(os.path.join(im2_path, im2_files[i]), cv2.IMREAD_GRAYSCALE)
         if(data["back"]=="true"):
             mask = cv2.bitwise_not(mask)
-    # 将mask图转化为灰度图
-    mask = mask / 255.0
-    # 将人像抠出来
-    person[:, :, 0] = person[:, :, 0] * mask
-    person[:, :, 1] = person[:, :, 1] * mask
-    person[:, :, 2] = person[:, :, 2] * mask
-    # 用相同的文件名保存为新的图片
-    cv2.imwrite(os.path.join("output", filename), person)
+        # 将mask图转化为灰度图
+        mask = mask / 255.0
+        # 将人像抠出来
+        person[:, :, 0] = person[:, :, 0] * mask
+        person[:, :, 1] = person[:, :, 1] * mask
+        person[:, :, 2] = person[:, :, 2] * mask
+        # 用相同的文件名保存为新的图片
+        cv2.imwrite(os.path.join("output", im1_files[i]), person)
 
 #白
 if(data["color"]=="white"):
