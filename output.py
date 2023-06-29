@@ -25,7 +25,7 @@ if(data["color"]=="none"):
         img3[:, :, 0:3] = img1
         img3[:, :, 3] = img2
         # 这里命名随意，但是要注意使用png格式
-        cv2.imwrite('output/' + '%s' % os.listdir(im1_path)[i], img3)
+        cv2.imwrite(os.path.join('output', '%s' % os.listdir(im1_path)[i]), img3)
 
 #黑
 if(data["color"]=="black"):
@@ -66,4 +66,4 @@ if(data["color"]=="white"):
         # 把mask图和原图相加
         img4 = cv2.add(img1, img3)
         # 这里命名随意，但是要注意使用png格式
-        cv2.imwrite('output/' + '%s' % os.listdir(im1_path)[i], img4)
+        cv2.imwrite(os.path.join('output', '%s' % os.listdir(im1_path)[i]), img3)

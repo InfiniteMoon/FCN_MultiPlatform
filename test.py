@@ -35,17 +35,18 @@ def main():
     feature = getattr(densenet, opt.q)(pretrained=False)
     feature.cpu()
     feature.eval()
-    sb = torch.load(r'parameters_densenet121\feature_model.pth', map_location=torch.device('cpu'))
+    sb = torch.load(os.path.join('parameters_densenet121', 'feature_model.pth'), map_location=torch.device('cpu'))
 
     feature.load_state_dict(sb)
 
     deconv = Deconv(opt.q)
     deconv.cpu()
     deconv.eval()
-    sb = torch.load(r'parameters_densenet121\deconv_model.pth', map_location=torch.device('cpu'))
+    sb = torch.load(os.path.join('parameters_densenet121', 'deconv_model.pth'), map_location=torch.device('cpu'))
+
 
     deconv.load_state_dict(sb)
-    test_loader = torch.utils.data.DataLoader(MyTestData(opt.input_dir), batch_size=bsize, shuffle=False, num_workers=1, pin_memory=True)
+    test_loader = torch.utils.data.DataLoader(MyTestData(opt.input_dir), batch_size=bsize, shuffle=False, num_workers=1, pin_memory=False)
 
     step_len = len(test_loader)
     for id, (data, img_name, img_size) in enumerate(test_loader):
@@ -61,7 +62,7 @@ def main():
             msk = (msk * 255).astype(np.uint8)
             msk = Image.fromarray(msk)
             msk = msk.resize((img_size[0][i], img_size[1][i]))
-            msk.save('%s\\%s.png' % (opt.output_dir, img_name[i]), 'PNG')
+            msk.save(os.path.join(opt.output_dir, '%s.png' % img_name[i]), 'PNG') 
 
         # 显示进度
         step_now = id + 1
