@@ -1,5 +1,5 @@
 cd "$(dirname "$0")"
-source ./venv/bin/activate
+source activate fcnM
 python3 initial.py
 python3 test.py
 python3 mask.py
