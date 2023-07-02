@@ -59,7 +59,8 @@ macOS和Windows都可以运行
 4k3模型黑色背景抠图  
 
 ![4k3原图](/sample/WechatIMG98.jpeg "4k3原图")
-![4k3效果](/sample/WechatIMG99.png "4k3效果")
+![4k3效果](/sample/WechatIMG99.png "4k3效果")  
+
 4k4模型黑色背景抠图  
 ![4k4原图](/sample/WechatIMG94.png "4k4原图")
 ![4k4mask](/sample/WechatIMG93.png "4k4mask")
