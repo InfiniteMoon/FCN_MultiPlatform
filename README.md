@@ -56,7 +56,8 @@
 本项目是简单的基于FCN-Densenet的图像前后景分割项目  
 macOS和Windows都可以运行
 ## 效果演示
-4k3模型黑色背景抠图
+4k3模型黑色背景抠图  
+
 ![4k3原图](/sample/WechatIMG98.jpeg "4k3原图")
 ![4k3效果](/sample/WechatIMG99.png "4k3效果")
 4k4模型黑色背景抠图  
